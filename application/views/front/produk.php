@@ -68,11 +68,7 @@
       ?>  
       <div class="col-md-4 col-sm-6">
         <div class="room-thumb">
-         <?php if(empty($l->brngGambar)){?>
-          <img src="<?=base_url()?>assets/file_upload/images.jpg" class="image-responsive" width ="150px" height="200px">
-          <?php }else{ ?>
-          <img src="<?=base_url()?>assets/file_upload/<?=$l->brngGambar?>" class="image-responsive" width ="150px" height="200px"> 
-         <?php } ?> 
+         
          <div class="mask">
             <div class="main">
               <h5><?=$l->brngNama?></h5> 
