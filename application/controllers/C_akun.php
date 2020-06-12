@@ -43,6 +43,7 @@ class C_akun extends CI_Controller {
 		$data = array(
 			'noakun' => $noakun,
 			'namaakun' => $this->input->post('namaakun', true),
+			'beban' => $this->input->post('beban', true),
 		);
 		$simpan = $this->M_pos->simpan_data($data,'akun');
 		if($simpan){
@@ -63,8 +64,9 @@ class C_akun extends CI_Controller {
 
 	public function ubah_akun($noakun){
 		$data = array(
-		'noakun' => $this->input->post('noakun', true),
-		'namaakun' => $this->input->post('namaakun', true),
+			'noakun' => $this->input->post('noakun', true),
+			'namaakun' => $this->input->post('namaakun', true),
+			'beban' => $this->input->post('beban', true),
 		);
 
 		$ubah = $this->M_pos->update('noakun',$noakun,'akun',$data);

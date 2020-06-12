@@ -60,6 +60,16 @@
                        <span class="help-inline"></span>
                     </div>
                   </div>
+                  <div class="control-group primary">
+                    <label class="control-label" for="inputWarning">Jenis Akun</label>
+                    <div class="controls">
+                       <select name="beban" class="span6 chosen" >
+                       <option value="0" <?php if(@$akun->beban==0){echo "selected";}?>>Non-Beban</option>
+                       <option value="1" <?php if(@$akun->beban==1){echo "selected";}?>>Beban</option>
+                       </select>
+                       <span class="help-inline"></span>
+                    </div>
+                  </div>
                   <div class="form-actions">
                     <button type="submit" class="btn btn-primary"><i class="icon-ok"></i>Ubah Data</button>
                     <!-- <button type="reset" class="btn btn-warning"><i class="icon-remove"></i>Hapus Data</button> -->
