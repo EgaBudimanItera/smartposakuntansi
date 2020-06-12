@@ -36,8 +36,8 @@
                 </span>
             </div>
             <div class="widget-body">
-             <div><a href="<?=base_url()?>c_penjualan/formtambah" class="btn btn-primary">Tambah Data</a></div>
-             <br>
+             <!-- <div><a href="<?=base_url()?>c_penjualan/formtambah" class="btn btn-primary">Tambah Data</a></div> -->
+             <!-- <br> -->
              <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
 
               <table class="table table-striped table-bordered" id="sample_1">
