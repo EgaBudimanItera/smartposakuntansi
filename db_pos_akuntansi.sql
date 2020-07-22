@@ -1,16 +1,17 @@
 /*
-SQLyog Enterprise - MySQL GUI v7.14 
-MySQL - 5.6.21 : Database - db_pos_akuntansi
+SQLyog Ultimate v12.4.3 (64 bit)
+MySQL - 10.1.30-MariaDB : Database - db_pos_akuntansi
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
 
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_pos_akuntansi` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `db_pos_akuntansi`;
@@ -30,7 +31,11 @@ CREATE TABLE `akun` (
 
 /*Data for the table `akun` */
 
-insert  into `akun`(`noakun`,`namaakun`,`saldo`,`is_deleted`,`beban`) values ('1110','Kas',0,'0','0'),('4110','Penjualan',0,'0','0'),('4210','Diskon Penjualan',0,'0','0'),('5110','Beban Gaji',NULL,'1','1'),('5111','beban x',NULL,'1','1'),('5112','a',NULL,'1','1');
+insert  into `akun`(`noakun`,`namaakun`,`saldo`,`is_deleted`,`beban`) values 
+('1020','Beban',NULL,'1','1'),
+('1110','Kas',0,'0','0'),
+('4110','Penjualan',0,'0','0'),
+('4210','Diskon Penjualan',0,'0','0');
 
 /*Table structure for table `barang` */
 
@@ -46,11 +51,12 @@ CREATE TABLE `barang` (
   KEY `brngId` (`brngId`),
   KEY `FK_barang` (`brngStunId`),
   CONSTRAINT `FK_barang` FOREIGN KEY (`brngStunId`) REFERENCES `satuan` (`stunId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `barang` */
 
-insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHargaJual`) values (17,'B001','Banner 3x3 Meter',3,30000);
+insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHargaJual`) values 
+(19,'B001','asd',3,20000);
 
 /*Table structure for table `beban` */
 
@@ -68,7 +74,9 @@ CREATE TABLE `beban` (
 
 /*Data for the table `beban` */
 
-insert  into `beban`(`idbeban`,`tanggal`,`noakun`,`jumlah`,`keterangan`) values ('BI001','2020-05-03','5110',400000,'');
+insert  into `beban`(`idbeban`,`tanggal`,`noakun`,`jumlah`,`keterangan`) values 
+('BI001','2020-05-03','5110',400000,''),
+('BI002','2020-07-22','1020',1000000,'Bayar Gaji');
 
 /*Table structure for table `detorderpenjualan` */
 
@@ -84,11 +92,17 @@ CREATE TABLE `detorderpenjualan` (
   PRIMARY KEY (`dopjId`),
   KEY `FK_detpenjualan` (`dopjBrngId`),
   KEY `FK_detpenjualan1` (`dopjOpnjId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `detorderpenjualan` */
 
-insert  into `detorderpenjualan`(`dopjId`,`dopjOpnjId`,`dopjBrngId`,`dopjJumlah`,`dopjHarga`,`dopjDiskon`) values (2,2,17,1,30000,0),(3,3,17,1,30000,0);
+insert  into `detorderpenjualan`(`dopjId`,`dopjOpnjId`,`dopjBrngId`,`dopjJumlah`,`dopjHarga`,`dopjDiskon`) values 
+(2,2,17,1,30000,0),
+(3,3,17,1,30000,0),
+(4,4,19,32,20000,1),
+(5,5,19,22,20000,1),
+(6,6,19,33,20000,2),
+(7,7,19,2,20000,0);
 
 /*Table structure for table `detorderpenjualan_temp` */
 
@@ -103,7 +117,7 @@ CREATE TABLE `detorderpenjualan_temp` (
   `dopjCreatedBy` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`dopjId`),
   KEY `FK_detpenjualan` (`dopjBrngId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `detorderpenjualan_temp` */
 
@@ -123,11 +137,13 @@ CREATE TABLE `detpenjualan` (
   KEY `FK_detpenjualan1` (`dtpjPnjlId`),
   CONSTRAINT `FK_detpenjualan` FOREIGN KEY (`dtpjBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_detpenjualan1` FOREIGN KEY (`dtpjPnjlId`) REFERENCES `penjualan` (`pnjlId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpenjualan` */
 
-insert  into `detpenjualan`(`dtpjId`,`dtpjPnjlId`,`dtpjBrngId`,`dtpjJumlah`,`dtpjHarga`,`dtpjDiskon`) values (4,3,17,1,30000,0),(5,4,17,1,30000,0);
+insert  into `detpenjualan`(`dtpjId`,`dtpjPnjlId`,`dtpjBrngId`,`dtpjJumlah`,`dtpjHarga`,`dtpjDiskon`) values 
+(6,5,19,32,20000,1),
+(7,6,19,33,20000,2);
 
 /*Table structure for table `detpenjualan_temp` */
 
@@ -161,11 +177,17 @@ CREATE TABLE `orderpenjualan` (
   `opnjPnjlId` int(11) DEFAULT NULL,
   PRIMARY KEY (`opnjId`),
   KEY `FK_penjualan` (`opnjPlgnId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `orderpenjualan` */
 
-insert  into `orderpenjualan`(`opnjId`,`opnjNoFaktur`,`opnjTanggal`,`opnjPlgnId`,`opnjKet`,`opnjTotalOrder`,`opnjStatusOrder`,`opnjPnjlId`) values (2,'PJ05200001','2020-05-08',7,'asas',30000,'Sales',3),(3,'PJ06200002','2020-06-12',7,'as',30000,'Sales',4);
+insert  into `orderpenjualan`(`opnjId`,`opnjNoFaktur`,`opnjTanggal`,`opnjPlgnId`,`opnjKet`,`opnjTotalOrder`,`opnjStatusOrder`,`opnjPnjlId`) values 
+(2,'PJ05200001','2020-05-08',7,'asas',30000,'Sales',3),
+(3,'PJ06200002','2020-06-12',7,'as',30000,'Sales',4),
+(4,'PJ07200003','2020-07-22',7,'sdf',640000,'Sales',5),
+(5,'PJ07200004','2020-07-22',0,'',440000,'Order',0),
+(6,'PJ07200004','2020-07-23',7,'sf',660000,'Sales',6),
+(7,'PJ07200005','2020-07-22',7,'asd',40000,'Order',0);
 
 /*Table structure for table `pelanggan` */
 
@@ -189,7 +211,8 @@ CREATE TABLE `pelanggan` (
 
 /*Data for the table `pelanggan` */
 
-insert  into `pelanggan`(`plgnId`,`plgnKode`,`plgnNama`,`plgnNamaKontak`,`plgnTelp1`,`plgnTelp2`,`plgnAlamat`,`plgnPiutang`,`plgnNik`,`plgnNamaUser`,`plgnPassword`,`plgnEmail`) values (7,'P001','eg','sas','34','324','324324',0,NULL,'sadasd','123','asas');
+insert  into `pelanggan`(`plgnId`,`plgnKode`,`plgnNama`,`plgnNamaKontak`,`plgnTelp1`,`plgnTelp2`,`plgnAlamat`,`plgnPiutang`,`plgnNik`,`plgnNamaUser`,`plgnPassword`,`plgnEmail`) values 
+(7,'P001','eg','sas','34','324','324324',NULL,'34','sadasd','123','sfd');
 
 /*Table structure for table `penjualan` */
 
@@ -210,11 +233,15 @@ CREATE TABLE `penjualan` (
   PRIMARY KEY (`pnjlId`),
   KEY `FK_penjualan` (`pnjlPlgnId`),
   CONSTRAINT `FK_penjualan` FOREIGN KEY (`pnjlPlgnId`) REFERENCES `pelanggan` (`plgnId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `penjualan` */
 
-insert  into `penjualan`(`pnjlId`,`pnjlNoFaktur`,`pnjlTanggal`,`pnjlPlgnId`,`pnjlKet`,`pnjlTotalJual`,`pnjlSisaBayar`,`pnjlUangMuka`,`pnjlJatuhTempo`,`pnjlDiskon`,`pnjlOngkir`) values (3,'PJ05200001','2020-05-08',7,'asas',30000,30000,0,'2020-06-07',0,0),(4,'PJ06200002','2020-06-12',7,'as',30000,30000,0,'2020-07-12',0,0);
+insert  into `penjualan`(`pnjlId`,`pnjlNoFaktur`,`pnjlTanggal`,`pnjlPlgnId`,`pnjlKet`,`pnjlTotalJual`,`pnjlSisaBayar`,`pnjlUangMuka`,`pnjlJatuhTempo`,`pnjlDiskon`,`pnjlOngkir`) values 
+(3,'PJ05200001','2020-05-08',7,'asas',30000,30000,0,'2020-06-07',0,0),
+(4,'PJ06200002','2020-06-12',7,'as',30000,30000,0,'2020-07-12',0,0),
+(5,'PJ07200003','2020-07-22',7,'sdf',640000,640000,0,'2020-08-21',0,0),
+(6,'PJ07200004','2020-07-23',7,'sf',660000,660000,0,'2020-08-22',0,0);
 
 /*Table structure for table `satuan` */
 
@@ -225,11 +252,12 @@ CREATE TABLE `satuan` (
   `stunNama` varchar(40) NOT NULL,
   `stunSimbol` varchar(20) NOT NULL,
   PRIMARY KEY (`stunId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `satuan` */
 
-insert  into `satuan`(`stunId`,`stunNama`,`stunSimbol`) values (3,'Buah','Bh'),(6,'5110','Biaya Gaji');
+insert  into `satuan`(`stunId`,`stunNama`,`stunSimbol`) values 
+(3,'Buah','Bh');
 
 /*Table structure for table `users` */
 
@@ -245,7 +273,10 @@ CREATE TABLE `users` (
 
 /*Data for the table `users` */
 
-insert  into `users`(`userId`,`userNama`,`userPassword`,`userHakAkses`) values (26,'penjualan','penjualan','Penjualan'),(27,'keuangan','keuangan','Keuangan'),(28,'pimpinan','pimpinan','Pimpinan');
+insert  into `users`(`userId`,`userNama`,`userPassword`,`userHakAkses`) values 
+(26,'penjualan','penjualan','Penjualan'),
+(27,'keuangan','keuangan','Keuangan'),
+(28,'pimpinan','pimpinan','Pimpinan');
 
 /*Table structure for table `vw_jurnal` */
 
@@ -254,22 +285,24 @@ DROP TABLE IF EXISTS `vw_jurnal`;
 /*!50001 DROP VIEW IF EXISTS `vw_jurnal` */;
 /*!50001 DROP TABLE IF EXISTS `vw_jurnal` */;
 
-/*!50001 CREATE TABLE `vw_jurnal` (
-  `kodetransaksi` varchar(40) NOT NULL DEFAULT '',
-  `tanggal` date DEFAULT NULL,
-  `noakun` varchar(10) DEFAULT NULL,
-  `jumlah` double DEFAULT NULL,
-  `keterangan` text,
-  `namaakun` varchar(20) DEFAULT NULL,
-  `status` varchar(1) CHARACTER SET utf8 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 */;
+/*!50001 CREATE TABLE  `vw_jurnal`(
+ `kodetransaksi` varchar(40) ,
+ `tanggal` date ,
+ `noakun` varchar(10) ,
+ `jumlah` double ,
+ `keterangan` text ,
+ `namaakun` varchar(20) ,
+ `status` varchar(1) 
+)*/;
 
 /*View structure for view vw_jurnal */
 
 /*!50001 DROP TABLE IF EXISTS `vw_jurnal` */;
 /*!50001 DROP VIEW IF EXISTS `vw_jurnal` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_jurnal` AS (select `beban`.`idbeban` AS `kodetransaksi`,`beban`.`tanggal` AS `tanggal`,`beban`.`noakun` AS `noakun`,`beban`.`jumlah` AS `jumlah`,`beban`.`keterangan` AS `keterangan`,`akun`.`namaakun` AS `namaakun`,'1' AS `status` from (`beban` join `akun`) where (`beban`.`noakun` = `akun`.`noakun`)) union (select `penjualan`.`pnjlNoFaktur` AS `pnjlNoFaktur`,`penjualan`.`pnjlTanggal` AS `pnjlTanggal`,'4110' AS `4110`,`penjualan`.`pnjlTotalJual` AS `pnjlTotalJual`,'Penjualan Barang' AS `Penjualan Barang`,`akun`.`namaakun` AS `namaakun`,'2' AS `2` from (`penjualan` join `akun`) where (`akun`.`noakun` = '4110')) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vw_jurnal` AS (select `beban`.`idbeban` AS `kodetransaksi`,`beban`.`tanggal` AS `tanggal`,`beban`.`noakun` AS `noakun`,`beban`.`jumlah` AS `jumlah`,`beban`.`keterangan` AS `keterangan`,`akun`.`namaakun` AS `namaakun`,'1' AS `status` from (`beban` join `akun`) where (`beban`.`noakun` = `akun`.`noakun`)) union (select `penjualan`.`pnjlNoFaktur` AS `pnjlNoFaktur`,`penjualan`.`pnjlTanggal` AS `pnjlTanggal`,'4110' AS `4110`,`penjualan`.`pnjlTotalJual` AS `pnjlTotalJual`,'Penjualan Barang' AS `Penjualan Barang`,`akun`.`namaakun` AS `namaakun`,'2' AS `2` from (`penjualan` join `akun`) where (`akun`.`noakun` = '4110')) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
