@@ -13,7 +13,7 @@ Website: http://thevectorlab.net/
 
 <head>
   <meta charset="utf-8" />
-  <title>Login page</title>
+  <title>Login Page</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta content="" name="description" />
   <meta content="" name="author" />
@@ -29,7 +29,8 @@ Website: http://thevectorlab.net/
   <div class="login-header">
       <!-- BEGIN LOGO -->
       <div id="logo" class="center">
-          <img src="<?php echo base_url() ?>assets/img/logo2.png" alt="logo" class="center" />
+          <!-- <img src="<?php echo base_url() ?>assets/img/logo2.png" alt="logo" class="center" /> -->
+          <h5>Smart Pos Akuntansi</h5>
           <?php echo $this->session->flashdata("status") ?>
       </div>
       <!-- END LOGO -->
@@ -56,11 +57,11 @@ Website: http://thevectorlab.net/
                   <div class="input-prepend">
                       <span class="add-on"><i class="icon-key"></i></span><input id="input-password" type="password" placeholder="Password" name="userPassword" />
                   </div>
-                  <div class="mtop10">
+                  <!-- <div class="mtop10">
                       <div class="block-hint pull-left small">
                           <input type="checkbox" id=""> Remember Me
                       </div>
-                  </div>
+                  </div> -->
 
                   <div class="clearfix space5"></div>
               </div>
@@ -75,7 +76,7 @@ Website: http://thevectorlab.net/
   <!-- END LOGIN -->
   <!-- BEGIN COPYRIGHT -->
   <div id="login-copyright">
-      <?php echo date("Y") ?> &copy; 
+      Copyright &copy; <?php echo date("Y") ?> Smart Pos Akuntansi 
   </div>
   <!-- END COPYRIGHT -->
   <!-- BEGIN JAVASCRIPTS -->

@@ -2,10 +2,10 @@
 <!-- END CONTAINER -->
 <!-- BEGIN FOOTER -->
         <div id="footer">
-            <?php echo date("Y"); ?> &copy; .
-            <div class="span pull-right">
+        Copyright &copy; <?php echo date("Y"); ?> Smart Pos Akuntansi
+            <!-- <div class="span pull-right">
                 <span class="go-top"><i class="icon-arrow-up"></i></span>
-            </div>
+            </div> -->
         </div>
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS -->

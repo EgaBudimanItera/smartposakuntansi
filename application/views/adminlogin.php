@@ -13,7 +13,7 @@ Website: http://thevectorlab.net/
 
 <head>
   <meta charset="utf-8" />
-  <title>Login page</title>
+  <title>Login Page</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta content="" name="description" />
   <meta content="" name="author" />
@@ -29,7 +29,7 @@ Website: http://thevectorlab.net/
   <div class="login-header">
       <!-- BEGIN LOGO -->
       <div id="logo" class="center">
-          <img src="<?php echo base_url() ?>assets/img/logo2.png" alt="logo" class="center" />
+          <!-- <img src="<?php echo base_url() ?>assets/img/logo2.png" alt="logo" class="center" /> -->
           <?php echo $this->session->flashdata("status") ?>
       </div>
       <!-- END LOGO -->

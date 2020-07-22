@@ -144,13 +144,14 @@
             <div class="control-group">
               <label class="control-label">Nama Barang</label>
               <div class="controls">
-                 <select class="select2-containerpopulate" style="width: 300px" data-placeholder="Pilih Barang" tabindex="1" name="dopjBrngId" id="dopjBrngId">
+                 <select class="select2-containerpopulate" style="width: 350px" data-placeholder="Pilih Barang" tabindex="1" name="dopjBrngId" id="dopjBrngId">
                     <option value=""></option>
                     <!-- ambil nilai satuan dari tabel satuan -->
                     <?php
                       foreach($barang as $b){
                     ?>
                     <option value="<?=$b->brngId?>" data-satuan="<?=$b->stunNama?>" data-harga="<?php echo number_format($b->brngHargaJual)?>"><?=$b->brngNama?></option>
+                    
                     <?php    
                       }
                     ?>
@@ -171,12 +172,12 @@
                  
               </div>
             </div>
-            <div class="control-group">
+            <!-- <div class="control-group">
               <label class="control-label" for="inputWarning">Diskon</label>
               <div class="controls">
                  <input type="number" class="span12" id="dopjDiskon" required name="dopjDiskon" />
                  
-              </div>
+              </div> -->
             </div> 
             <div class="form-actions">
               <button type="button" class="btn btn-primary" onclick="simpan()"><i class="icon-ok"></i> Simpan Barang</button>

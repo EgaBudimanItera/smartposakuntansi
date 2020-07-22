@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>SIMPOS</title>
+	<title>Smart Pos Akuntansi</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -32,7 +32,8 @@
             <div class="container-fluid">
                 <!-- BEGIN LOGO -->
                 <a class="brand" href="#">
-                    <img src="<?php echo base_url() ?>assets/img/logo2.png" alt="Admin" />
+                    <!-- <img src="<?php echo base_url() ?>assets/img/logo2.png" alt="Admin" /> -->
+                    Smart Pos
                 </a>
                 <!-- END LOGO -->
                 <!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -48,7 +49,7 @@
                         <!-- BEGIN USER LOGIN DROPDOWN -->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="username">Admin</span>
+                                <span class="username"><?php echo ucfirst(trim($this->session->userdata('userNama')));?></span>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
